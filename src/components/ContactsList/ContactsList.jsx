@@ -1,41 +1,31 @@
 import { useEffect } from 'react';
-import { ContactsListStyled } from './ContactsListStyled';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact, fetchContacts } from 'redux/operations';
-import { selectVisibleContacts } from 'redux/selectors';
+import { selectVisibleContacts } from 'redux/contacts/selectors';
+import { fetchContacts } from 'redux/contacts/operations';
+import { Box, Typography } from '@mui/material';
+import ContactsItem from 'components/ContactsItem/ContactsItem';
 
-export const ContactsList = () => {
+const ContactsList = () => {
   const dispatch = useDispatch();
   const visibleContacts = useSelector(selectVisibleContacts);
 
   useEffect(() => {
     dispatch(fetchContacts());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const removeContact = contactId => {
-    dispatch(deleteContact(contactId));
-  };
-
   return (
-    <ContactsListStyled>
-      {visibleContacts.map(({ id, name, number }) => {
-        return (
-          <li className="contacts-item" key={id}>
-            <span>{name}</span>
-            <span>{number}</span>
-            <button
-              type="button"
-              className="contact-registration-btn"
-              onClick={() => {
-                removeContact(id);
-              }}
-            >
-              delete
-            </button>
-          </li>
-        );
-      })}
-    </ContactsListStyled>
+    <Box sx={{ padding: '10px' }}>
+      {visibleContacts.length === 0 ? (
+        <Typography component="p" align="center">
+          Your contact list is empty
+        </Typography>
+      ) : (
+        visibleContacts.map(contact => {
+          return <ContactsItem contactData={contact} key={contact.id} />;
+        })
+      )}
+    </Box>
   );
 };
+export default ContactsList;
