@@ -1,18 +1,11 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { selectVisibleContacts } from 'redux/contacts/selectors';
-import { fetchContacts } from 'redux/contacts/operations';
 import { Box, Typography } from '@mui/material';
 import ContactsItem from 'components/ContactsItem/ContactsItem';
+import { useSelector } from 'react-redux';
 
 const ContactsList = () => {
-  const dispatch = useDispatch();
   const visibleContacts = useSelector(selectVisibleContacts);
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <Box sx={{ padding: '10px' }}>

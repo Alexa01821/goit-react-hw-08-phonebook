@@ -11,10 +11,7 @@ import EditContactForm from 'components/EditContactForm/EditContactForm';
 import { Notify } from 'notiflix';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  deleteContact,
-  fetchContacts,
-} from 'redux/contacts/operations';
+import { deleteContact, fetchContacts } from 'redux/contacts/operations';
 
 const ContactsItem = ({ contactData: { id, name, number } }) => {
   const [edit, setEdit] = useState(false);
@@ -51,7 +48,7 @@ const ContactsItem = ({ contactData: { id, name, number } }) => {
               lineHeight: 1.25,
               color: '#FF6347',
             }}
-            onClick={id => handleDelete(id)}
+            onClick={() => handleDelete(id)}
           >
             delete
           </Button>
@@ -67,7 +64,12 @@ const ContactsItem = ({ contactData: { id, name, number } }) => {
         </Box>
       </ListItem>
       {edit && (
-        <EditContactForm contactId={id} oldName={name} oldNumber={number} />
+        <EditContactForm
+          contactId={id}
+          oldName={name}
+          oldNumber={number}
+          editChange={editChange}
+        />
       )}
     </Box>
   );

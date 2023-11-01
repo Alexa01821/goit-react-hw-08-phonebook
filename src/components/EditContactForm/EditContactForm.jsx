@@ -2,9 +2,9 @@ import { Box, Button, TextField } from '@mui/material';
 import { Notify } from 'notiflix';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { patchContact } from 'redux/contacts/operations';
+import { fetchContacts, patchContact } from 'redux/contacts/operations';
 
-const EditContactForm = ({ contactId, oldName, oldNumber }) => {
+const EditContactForm = ({ contactId, oldName, oldNumber, editChange }) => {
   const [name, setName] = useState(oldName);
   const [number, setNumber] = useState(oldNumber);
   const dispatch = useDispatch();
@@ -13,10 +13,13 @@ const EditContactForm = ({ contactId, oldName, oldNumber }) => {
     name === 'name' ? setName(value) : setNumber(value);
   };
 
+  
   const handleEdit = async event => {
     event.preventDefault();
     try {
       await dispatch(patchContact({ contactId, name, number })).unwrap();
+      dispatch(fetchContacts());
+      editChange()
     } catch (error) {
       Notify.failure('Something with wrong with edit contact');
     }

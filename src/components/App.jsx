@@ -11,7 +11,6 @@ import Loader from './Loader/Loader';
 const App = () => {
   return (
     <>
-      {' '}
       <Loader />
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -40,6 +39,7 @@ const App = () => {
               </PublicRoute>
             }
           />
+          <Route path="*" element={<Home />} />
         </Route>
       </Routes>
     </>

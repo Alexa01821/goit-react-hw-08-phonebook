@@ -1,6 +1,6 @@
 import { Box, Button } from '@mui/material';
 import { Notify } from 'notiflix';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logOut } from 'redux/auth/operations';
 import { selectUser } from 'redux/auth/selectors';
@@ -8,6 +8,7 @@ import { selectUser } from 'redux/auth/selectors';
 const UserMenu = () => {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   return (
     user && (
@@ -23,7 +24,7 @@ const UserMenu = () => {
           }}
           onClick={() => {
             Notify.success(`Goodbye, ${user.name}`);
-            logOut();
+            dispatch(logOut());
             navigate('/');
           }}
         >
