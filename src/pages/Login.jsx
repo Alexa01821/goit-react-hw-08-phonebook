@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleSubmit = async userData => {
     try {
-      await dispatch(logIn({ userData })).unwrap();
+      await dispatch(logIn( userData )).unwrap();
       Notify.success(`Welcome, ${user}`);
     } catch (error) {
       Notify.failure('Something with wrong with email or login!');

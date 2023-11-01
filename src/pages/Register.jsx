@@ -12,7 +12,7 @@ const Register = () => {
 
   const handleSubmit = async credentials => {
     try {
-      await dispatch(register({ credentials })).unwrap();
+      await dispatch(register(credentials)).unwrap();
       Notify.success(`Welcome, ${user}`);
     } catch (error) {
       Notify.failure('Something with wrong with register!');
