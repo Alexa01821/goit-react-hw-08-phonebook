@@ -1,19 +1,17 @@
 import { Avatar, Box, Typography } from '@mui/material';
 import LoginForm from 'components/LoginForm/LoginForm';
 import { Notify } from 'notiflix';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
-import { selectUser } from 'redux/auth/selectors';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
 
   const handleSubmit = async userData => {
     try {
-      await dispatch(logIn( userData )).unwrap();
-      Notify.success(`Welcome, ${user}`);
+      await dispatch(logIn(userData)).unwrap();
+      Notify.success(`Welcome!}`);
     } catch (error) {
       Notify.failure('Something with wrong with email or login!');
     }

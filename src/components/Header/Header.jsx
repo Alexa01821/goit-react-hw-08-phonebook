@@ -9,7 +9,7 @@ import { Book } from '@mui/icons-material';
 const Header = () => {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
-
+  
   return (
     <AppBar position="static">
       <Container maxWidth="xl">

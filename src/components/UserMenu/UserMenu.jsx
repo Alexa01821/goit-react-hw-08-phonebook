@@ -9,7 +9,7 @@ const UserMenu = () => {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-
+  
   return (
     user && (
       <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
